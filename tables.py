@@ -7,20 +7,12 @@ class Table:
         self.table = table
 
     def columns(self):
-        cols = ()
-        # Check parent if exists
-        if self.table:
-            cols += self.table.columns()
-        cols += (self.column_name,)
-        return cols
+        return self.table.columns() + (self.column_name,) if self.table \
+                else (self.column_name,)
 
     def data(self, data):
-        d = ()
-        # Check parent if exists
-        if self.table:
-            d += self.table.data(data)
-        d += (self.f(data),)
-        return d
+        return self.table.data(data) + (self.f(data),) if self.table \
+                else (self.f(data),)
 
 if __name__ == "__main__":
 
